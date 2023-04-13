@@ -4,25 +4,25 @@
 	import github from '$lib/images/github.svg';
 </script>
 
-<header>
+<header class="text-gray-950">
 	<div class="corner">
-		<a href="https://kit.svelte.dev">
+		<a href="/">
 			<img src={logo} alt="SvelteKit" />
 		</a>
 	</div>
 
 	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
+		<svg  viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 		</svg>
-		<ul>
+		<ul class="font-bold bg-gray-950 tex">
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
+				<a href="/" class="text-gray-950">Home</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/testing' ? 'page' : undefined}>
+			<li aria-current={$page.url.pathname === '/login' ? 'page' : undefined}>
 				<a href="/login">Login</a>
 			</li>
 		</ul>
@@ -36,6 +36,7 @@
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>
+
 </header>
 
 <style>
@@ -66,7 +67,7 @@
 	nav {
 		display: flex;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+		--background: rgb(255,62,0);
 	}
 
 	svg {
@@ -93,7 +94,7 @@
 	}
 
 	li {
-		position: relative;
+		position: relative; 
 		height: 100%;
 	}
 
@@ -106,7 +107,7 @@
 		top: 0;
 		left: calc(50% - var(--size));
 		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
+		border-top: var(--size) solid ;
 	}
 
 	nav a {
@@ -114,7 +115,7 @@
 		height: 100%;
 		align-items: center;
 		padding: 0 0.5rem;
-		color: var(--color-text);
+		color: rgb(2,6,14);
 		font-weight: 700;
 		font-size: 0.8rem;
 		text-transform: uppercase;
@@ -124,6 +125,6 @@
 	}
 
 	a:hover {
-		color: var(--color-theme-1);
+		color: rgb(250,250,249);
 	}
 </style>

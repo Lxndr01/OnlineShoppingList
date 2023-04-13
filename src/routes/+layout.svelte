@@ -1,17 +1,17 @@
 <script>
-	import Header from './Header.svelte';
+	import Card from '$lib/components/Card.svelte';
+import Header from './Header.svelte';
 	import './styles.css';
 </script>
 
-<div class="app">
+<div class="app bg-gray-950">
 	<Header />
 
 	<main>
 		<slot />
 	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+	<footer class="text-amber-50">
+		<p><strong>Készítette Bogács László, Takács Kevin, és Ragasits Márk</strong></p>
 	</footer>
 </div>
 

@@ -6,6 +6,8 @@
 	import axios from 'axios';
 	import { push } from 'svelte-spa-router';
 	import { goto } from '$app/navigation';
+	import '../app.css'
+	import Card from '$lib/components/Card.svelte';
 
 	let authorized = false;
 	let unauthorized = true;
@@ -23,8 +25,8 @@
 					console.log('Siker!');
 					authorized = true;
 					unauthorized = false;
-					userId = response.data.id
-					await goto('/'+userId)
+					userId = response.data.id;
+					await goto('/' + userId);
 				} else {
 					console.log('Hiba történt!');
 					authorized = false;
@@ -38,22 +40,15 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Online Bevásárlólista</title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 <section>
 	{#if authorized}
-		<h1>
-			<span class="welcome User">
-				<picture>
-					<source srcset={welcome} type="image/webp" />
-					<img src={welcome_fallback} alt="Welcome" />
-				</picture>
-			</span>
-
-			to your new<br />SvelteKit app User
-		</h1>
+	<h1 class="text-4xl text-orange-600">
+		Üdvözöllek az Online Bevásárlólista weboldalon!
+	</h1>
 		<p>{userId}</p>
 		<h2>
 			try editing <strong>src/routes/+page.svelte</strong>
@@ -61,22 +56,15 @@
 
 		<Counter />
 	{:else}
-		<h1>
-			<span class="welcome">
-				<picture>
-					<source srcset={welcome} type="image/webp" />
-					<img src={welcome_fallback} alt="Welcome" />
-				</picture>
-			</span>
-
-			to your new<br />SvelteKit app
+		<h1 class="text-5xl text-stone-50">
+			Üdvözöllek az Online Bevásárlólista weboldalon!
 		</h1>
-
-		<h2>
-			try editing <strong>src/routes/+page.svelte</strong>
+		<br>
+		<h2 class="text-amber-50">
+			Nincs fiókod? <a href="/register"><strong class="text-orange-500">Regisztrálj egyet!</strong></a>
 		</h2>
-
-		<Counter />
+		<br>
+		<Card />
 	{/if}
 </section>
 
