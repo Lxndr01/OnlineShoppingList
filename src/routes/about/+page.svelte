@@ -1,9 +1,13 @@
+<script>
+	import '../../app.css'
+</script>
+
 <svelte:head>
-	<title>About</title>
+	<title>Rólunk</title>
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<div class="text-column">
+<div class="text-column bg-gray-950">
 	<h1>About this app</h1>
 
 	<p>

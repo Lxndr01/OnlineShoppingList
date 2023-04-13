@@ -53,17 +53,15 @@
 		<h2>
 			try editing <strong>src/routes/+page.svelte</strong>
 		</h2>
-
-		<Counter />
+		<br class="gap-y-10">
+		<Card />
 	{:else}
 		<h1 class="text-5xl text-stone-50">
 			Üdvözöllek az Online Bevásárlólista weboldalon!
 		</h1>
-		<br>
-		<h2 class="text-amber-50">
+		<h2 class="text-amber-50 pt-4">
 			Nincs fiókod? <a href="/register"><strong class="text-orange-500">Regisztrálj egyet!</strong></a>
 		</h2>
-		<br>
 		<Card />
 	{/if}
 </section>

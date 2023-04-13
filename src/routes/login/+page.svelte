@@ -18,7 +18,7 @@
 				bind:value={usernameOrEmail}
 				type="text"
 				class="block border border-grey-light w-full p-3 rounded mb-4 font-bold text-gray-950"
-				placeholder="Felhasználónév vagy 	Email"
+				placeholder="Felhasználónév vagy Email"
 			/>
 			<input
 				bind:value={password}
@@ -34,9 +34,9 @@
 			>
 		</div>
 
-		<div class="text-grey-dark mt-6">
+		<div class="text-stone-50 mt-6">
 			Nincs még fiókod?
-			<a class="no-underline border-b border-blue text-blue" href="/register"> Regisztrálj!</a>
+			<a class="no-underline border-b border-blue text-orange-500" href="/register"> Regisztrálj!</a>
 		</div>
 	</div>
 </div>

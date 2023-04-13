@@ -1,4 +1,4 @@
-<div class="col-span-12 md:col-span-6 lg:col-span-4 md:order-1 grid gap-4 xl:gap-6">
+<div class="col-span-12 md:col-span-6 lg:col-span-4 md:order-1 grid gap-4 xl:gap-6 pt-20 lg:pt-36">
     <!-- Card -->
     <a class="md:order-2 relative before:absolute before:inset-0 before:z-10 before:border before:border-gray-200 before:rounded-xl before:transition before:hover:border-2 before:hover:border-blue-600 before:hover:shadow-lg" href="/about">
       <div class="relative overflow-hidden w-full h-full rounded-xl">

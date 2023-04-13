@@ -22,8 +22,18 @@ export const POST = async ({ request }: { request: Request }) => {
         const token = authHeader.split(' ')[1];
         const decodedToken = jwt.verify(token, JWTKEY) as TokenData;
 
-        return new Response(JSON.stringify({message: 'Authorized', id: decodedToken?.id}), {status: 200})
-    
+        const user = await prisma.user.findFirst({
+          where: {
+            id: decodedToken.id
+          },
+          select: {
+            email: true,
+            username: true,
+            id: true
+          }
+        })
+        return new Response(JSON.stringify({message: 'Authorized', id: decodedToken?.id, user: user}), {status: 200})
+        
       } catch (err) {
         console.error(err);
         return {
