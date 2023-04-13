@@ -4,9 +4,12 @@
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
+	import { push } from 'svelte-spa-router';
+	import { goto } from '$app/navigation';
 
 	let authorized = false;
 	let unauthorized = true;
+	let userId = '';
 
 	onMount(async () => {
 		const token = localStorage.getItem('token');
@@ -20,6 +23,8 @@
 					console.log('Siker!');
 					authorized = true;
 					unauthorized = false;
+					userId = response.data.id
+					await goto('/'+userId)
 				} else {
 					console.log('Hiba történt!');
 					authorized = false;
@@ -49,7 +54,7 @@
 
 			to your new<br />SvelteKit app User
 		</h1>
-
+		<p>{userId}</p>
 		<h2>
 			try editing <strong>src/routes/+page.svelte</strong>
 		</h2>
