@@ -40,11 +40,10 @@
 	};
 	const loginWithFacebook = async (email, username, password) => {
 		const data = {
-			username: "",
+			username: '',
 			email: email,
 			password: password
 		};
-		console.log(data)
 		try {
 			const response = await axios.post('http://localhost:5173/api/login', data, {
 				withCredentials: true
@@ -79,8 +78,8 @@
 		}
 
 		const userData = await response.data;
-		console.log(userData)
-		loginWithFacebook(userData.email, userData.name, userData.id)
+		console.log(userData);
+		loginWithFacebook(userData.email, userData.name, userData.id);
 	}
 
 	const dataChecking = () => {};
@@ -116,6 +115,9 @@
 				Regisztrálj!</a
 			>
 		</div>
-		<FacebookAuth appId="531171802427733" on:auth-success={(e) => getUserData(e.detail.accessToken)} />
+		<FacebookAuth
+			appId="531171802427733"
+			on:auth-success={(e) => getUserData(e.detail.accessToken)}
+		/>
 	</div>
 </div>

@@ -5,10 +5,10 @@
 	import { onMount } from 'svelte';
 	import '../../app.css';
 	import Card from '$lib/components/Card.svelte';
-    let userId = '';
+	let userId = '';
 	let username = '';
 
-    onMount(async () => {
+	onMount(async () => {
 		const token = localStorage.getItem('token');
 		if (token) {
 			axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -17,32 +17,33 @@
 					withCredentials: true
 				});
 				if (response.status === 200) {
-					console.log(response.data)
-					userId = response.data.id
-					username = response.data.user.username
+					console.log(response.data);
+					userId = response.data.id;
+					username = response.data.user.username;
 				} else {
 					console.log('Hiba történt!');
-                   await goto('/')
+					await goto('/');
 				}
 			} catch (error) {
 				console.log(error);
-                await goto('/')
+				await goto('/');
 			}
-		}else{
-                await goto('/')
-        }
+		} else {
+			await goto('/');
+		}
 	});
 </script>
+
 <section>
 	<h1 class="text-4xl text-orange-600">
 		Üdvözöllek az Online Bevásárlólista weboldalon <strong>{username}</strong>!
 	</h1>
-		<p>{userId}</p>
-		<h2>
-			try editing <strong>src/routes/+page.svelte</strong>
-		</h2>
-		<br class="gap-y-10">
-		<Card />
+	<p>{userId}</p>
+	<h2>
+		try editing <strong>src/routes/+page.svelte</strong>
+	</h2>
+	<br class="gap-y-10" />
+	<Card />
 </section>
 
 <style>
@@ -74,7 +75,3 @@
 		display: block;
 	}
 </style>
-
-
-
-  

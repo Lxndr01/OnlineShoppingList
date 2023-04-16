@@ -6,7 +6,7 @@
 	import axios from 'axios';
 	import { push } from 'svelte-spa-router';
 	import { goto } from '$app/navigation';
-	import '../app.css'
+	import '../app.css';
 	import Card from '$lib/components/Card.svelte';
 
 	let authorized = false;
@@ -27,7 +27,7 @@
 					authorized = true;
 					unauthorized = false;
 					userId = response.data.id;
-					username = response.data.user.username
+					username = response.data.user.username;
 					//await goto('/' + userId);
 				} else {
 					console.log('Hiba történt!');
@@ -48,19 +48,19 @@
 
 <section>
 	{#if authorized}
-	<h1 class="text-4xl text-orange-600">
-		Üdvözöllek az Online Bevásárlólista weboldalon 
-		<br>
-		<strong>{username}</strong>!
-	</h1>	
-		<br class="gap-y-10">
+		<h1 class="text-4xl text-orange-600">
+			Üdvözöllek az Online Bevásárlólista weboldalon
+			<br />
+			<strong>{username}</strong>!
+		</h1>
+		<br class="gap-y-10" />
 		<Card />
 	{:else}
-		<h1 class="text-5xl text-stone-50">
-			Üdvözöllek az Online Bevásárlólista weboldalon!
-		</h1>
+		<h1 class="text-5xl text-stone-50">Üdvözöllek az Online Bevásárlólista weboldalon!</h1>
 		<h2 class="text-amber-50 pt-4">
-			Nincs fiókod? <a href="/register"><strong class="text-orange-500">Regisztrálj egyet!</strong></a>
+			Nincs fiókod? <a href="/register"
+				><strong class="text-orange-500">Regisztrálj egyet!</strong></a
+			>
 		</h2>
 		<Card />
 	{/if}
