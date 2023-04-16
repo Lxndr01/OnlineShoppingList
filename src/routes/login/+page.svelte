@@ -1,12 +1,89 @@
 <script>
+	import { FacebookAuth } from '@beyonk/svelte-social-auth';
 	import '../../app.css';
+	import { get } from 'svelte/store';
+	import axios from 'axios';
+	import { goto } from '$app/navigation';
 
 	let usernameOrEmail = '';
 	let password = '';
 	let errorMessage = '';
 
-	const dataChecking = () => {
+	let isClicked = false;
+
+	const API_BASE_URL = 'https://graph.facebook.com/v12.0';
+
+	const login = async () => {
+		const data = {
+			email: usernameOrEmail,
+			password: password,
+			username: ''
+		};
+		try {
+			const response = await axios.post('http://localhost:5173/api/login', data, {
+				withCredentials: true
+			});
+			if (response.status === 200) {
+				console.log('Siker!');
+				isClicked = false;
+				console.log(response.data.token);
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+				window.localStorage.setItem('token', response.data.token);
+				goto('/');
+			} else {
+				errorMessage = 'Hiba történt!';
+			}
+		} catch {
+			errorMessage = 'Hiba történt!';
+			isClicked = false;
+		}
+	};
+	const loginWithFacebook = async (email, username, password) => {
+		const data = {
+			username: "",
+			email: email,
+			password: password
+		};
+		console.log(data)
+		try {
+			const response = await axios.post('http://localhost:5173/api/login', data, {
+				withCredentials: true
+			});
+			if (response.status === 200) {
+				console.log('Siker!');
+				isClicked = false;
+				console.log(response.data.token);
+				axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+				window.localStorage.setItem('token', response.data.token);
+				goto('/');
+			} else {
+				errorMessage = 'Hiba történt!';
+			}
+		} catch {
+			errorMessage = 'Hiba történt!';
+			isClicked = false;
+		}
+	};
+
+	export async function getUserData(token) {
+		const accessToken = token;
+
+		if (!accessToken) {
+			throw new Error('Access token not found');
+		}
+
+		const url = `${API_BASE_URL}/me?fields=id,name,email&access_token=${accessToken}`;
+		const response = await axios.get(url);
+		if (!response) {
+			throw new Error('Failed to fetch user data');
+		}
+
+		const userData = await response.data;
+		console.log(userData)
+		loginWithFacebook(userData.email, userData.name, userData.id)
 	}
+
+	const dataChecking = () => {};
 </script>
 
 <div class="bg-grey-lighter min-h-screen flex flex-col">
@@ -29,14 +106,16 @@
 			<button
 				type="submit"
 				class="w-full text-center py-3 rounded bg-green text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1"
-				on:click={dataChecking}
-				>Bejelentkezés</button
+				on:click={getUserData}>Bejelentkezés</button
 			>
 		</div>
 
 		<div class="text-stone-50 mt-6">
 			Nincs még fiókod?
-			<a class="no-underline border-b border-blue text-orange-500" href="/register"> Regisztrálj!</a>
+			<a class="no-underline border-b border-blue text-orange-500" href="/register">
+				Regisztrálj!</a
+			>
 		</div>
+		<FacebookAuth appId="531171802427733" on:auth-success={(e) => getUserData(e.detail.accessToken)} />
 	</div>
 </div>

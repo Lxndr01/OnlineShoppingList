@@ -12,6 +12,7 @@
 	let authorized = false;
 	let unauthorized = true;
 	let userId = '';
+	let username = '';
 
 	onMount(async () => {
 		const token = localStorage.getItem('token');
@@ -22,11 +23,12 @@
 					withCredentials: true
 				});
 				if (response.status === 200) {
-					console.log('Siker!');
+					console.log(response);
 					authorized = true;
 					unauthorized = false;
 					userId = response.data.id;
-					await goto('/' + userId);
+					username = response.data.user.username
+					//await goto('/' + userId);
 				} else {
 					console.log('Hiba történt!');
 					authorized = false;
@@ -47,12 +49,10 @@
 <section>
 	{#if authorized}
 	<h1 class="text-4xl text-orange-600">
-		Üdvözöllek az Online Bevásárlólista weboldalon!
-	</h1>
-		<p>{userId}</p>
-		<h2>
-			try editing <strong>src/routes/+page.svelte</strong>
-		</h2>
+		Üdvözöllek az Online Bevásárlólista weboldalon 
+		<br>
+		<strong>{username}</strong>!
+	</h1>	
 		<br class="gap-y-10">
 		<Card />
 	{:else}

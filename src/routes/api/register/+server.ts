@@ -31,23 +31,34 @@ export const POST = async ({ request }: { request: Request }) => {
         if (checkingUser) {
             return new Response(JSON.stringify({ message: 'Létezik felhasználó ezzel az emailcímmel/felhasználónévvel!' }), { status: 200 });
         }
-        const newUser = await prisma.user.create({
+        const newUser = await prisma.listUser.create({
             data: {
-                email: user.email,
-                username: user.username,
-                password: await bcrypt.hash(user.password, 10),
-                registeredAt: '' + Date.now()
+                list:{
+                    create: {
+                        name: 'alapértelmezett',
+                        importance: 'DEFAULT',
+                        expiresat: new Date().toISOString()
+                    }
+                },
+                user: {
+                    create: {
+                        email: user.email,
+                        username: user.username,
+                        password: await bcrypt.hash(user.password, 10),
+                        registeredAt: '' + Date.now()
+                    }
+                }
             }
         });
 
         const newTokenData: TokenData = {
             username: user.username,
             email: user.email,
-            id: newUser.id
+            id: newUser.userId
         }
 
         const token = jwt.sign(newTokenData, JWTKEY);
-        return new Response(JSON.stringify({ message: 'Sikeres regisztráció!', token: token }), {status: 201});
+        return new Response(JSON.stringify({ message: 'Sikeres regisztráció!', token: token }), { status: 201 });
     } catch (error) {
         return new Response(JSON.stringify({ message: 'Hiba történt!' }), { status: 500 });
     }

@@ -28,8 +28,8 @@ export const POST = async ({ request }: { request: Request }) => {
           },
           select: {
             email: true,
-            username: true,
-            id: true
+            id: true,
+            username: true            
           }
         })
         return new Response(JSON.stringify({message: 'Authorized', id: decodedToken?.id, user: user}), {status: 200})

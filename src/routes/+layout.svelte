@@ -1,17 +1,16 @@
 <script>
 	import Card from '$lib/components/Card.svelte';
-import Header from './Header.svelte';
+	import Header from './Header.svelte';
 	import './styles.css';
 </script>
 
 <div class="app bg-gray-950">
 	<Header />
-
 	<main>
 		<slot />
 	</main>
 	<footer class="text-amber-50">
-		<p><strong>Készítette Bogács László, Takács Kevin, és Ragasits Márk</strong></p>
+		<p>Készítette Bogács László, Takács Kevin, és Ragasits Márk</p>
 	</footer>
 </div>
 

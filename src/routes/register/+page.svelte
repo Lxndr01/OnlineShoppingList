@@ -3,6 +3,7 @@
 	import '../../app.css';
 	import axios from 'axios';
 	import routerNavigate from 'svelte-spa-router';
+	import { FacebookAuth } from '@beyonk/svelte-social-auth';
 
 	let username = '';
 	let email = '';
@@ -61,6 +62,52 @@
 			isClicked = false;
 		}
 	};
+	const registerWithFacebook = async (email, username, password) => {
+		const data = {
+			username: username,
+			email: email,
+			password: password
+		};
+		try {
+			const response = await axios.post('http://localhost:5173/api/register', data, {
+			withCredentials: true
+		});
+		if (response.status === 201) {
+			console.log('Siker!');
+			isClicked = false;
+			console.log(response.data.token);
+			axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+            window.localStorage.setItem('token', response.data.token);
+			goto('/')
+		} else if (response.status === 200) {
+			errorMessage = 'Létezik ez a felhasználónév/email!';
+		} else {
+			errorMessage = 'Hiba történt!';
+		}
+		} catch {
+			errorMessage = 'Hiba történt!';
+			isClicked = false;
+		}
+	};
+
+	const API_BASE_URL = "https://graph.facebook.com/v12.0";
+
+	export async function getUserData(token) {
+  	const accessToken =  token+"" 
+
+  if (!accessToken) {
+    throw new Error("Access token not found");
+  }
+
+  const url = `${API_BASE_URL}/me?fields=id,name,email&access_token=${accessToken}`;
+  const response = await axios.get(url);
+  if (!response) {
+    throw new Error("Failed to fetch user data");
+  }
+
+  const userData = await response.data;
+  await registerWithFacebook(userData.email, userData.name, userData.id)
+}
 </script>
 
 <div class="bg-grey-lighter min-h-screen flex flex-col">
@@ -124,5 +171,6 @@
 			Van már fiókod?
 			<a class="no-underline text-orange-500" href="/login"> Jelentkezz be!</a>
 		</div>
+		<FacebookAuth appId="531171802427733" on:auth-success={(e) => getUserData(e.detail.accessToken)}/>
 	</div>
 </div>
