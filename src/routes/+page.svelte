@@ -10,7 +10,6 @@
 	import Card from '$lib/components/Card.svelte';
 
 	let authorized = false;
-	let unauthorized = true;
 	let userId = '';
 	let username = '';
 
@@ -25,14 +24,12 @@
 				if (response.status === 200) {
 					console.log(response);
 					authorized = true;
-					unauthorized = false;
 					userId = response.data.id;
 					username = response.data.user.username;
 					//await goto('/' + userId);
 				} else {
 					console.log('Hiba történt!');
 					authorized = false;
-					unauthorized = true;
 				}
 			} catch (error) {
 				console.log(error);
