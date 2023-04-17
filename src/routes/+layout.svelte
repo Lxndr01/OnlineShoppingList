@@ -1,18 +1,25 @@
 <script>
-	import Card from '$lib/components/Card.svelte';
+	import { onMount } from 'svelte';
 	import Header from './Header.svelte';
 	import './styles.css';
-</script>
-
-<div class="app bg-gray-950">
-	<Header />
+	let authorized = false;
+  
+	onMount(() => {
+	  if (typeof window !== 'undefined' && window.localStorage.getItem('token')) {
+		authorized = true;
+	  }
+	});
+  </script>
+  
+  <div class="app bg-gray-950">
+	<Header {authorized} />
 	<main>
-		<slot />
+	  <slot />
 	</main>
 	<footer class="text-amber-50">
-		<p>Készítette Bogács László, Takács Kevin, és Ragasits Márk</p>
+	  <p>Készítette Bogács László, Takács Kevin, és Ragasits Márk</p>
 	</footer>
-</div>
+  </div>
 
 <style>
 	.app {

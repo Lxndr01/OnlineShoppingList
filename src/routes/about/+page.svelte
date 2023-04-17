@@ -1,5 +1,6 @@
 <script>
 	import '../../app.css';
+	import '../styles.css'
 </script>
 
 <svelte:head>
@@ -24,7 +25,12 @@
 	</p>
 
 	<p>
-		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
-		using it with JavaScript disabled!
+		
 	</p>
 </div>
+
+<style>
+	* {
+		background-color: white;
+	}
+</style>

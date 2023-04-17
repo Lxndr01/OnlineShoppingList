@@ -5,7 +5,7 @@
 	import axios from 'axios';
 	import { goto } from '$app/navigation';
 
-	let usernameOrEmail = '';
+	let usernam = '';
 	let password = '';
 	let errorMessage = '';
 
@@ -15,10 +15,11 @@
 
 	const login = async () => {
 		const data = {
-			email: usernameOrEmail,
+			email: usernam,
 			password: password,
-			username: ''
+			username: usernam
 		};
+		console.log(data)
 		try {
 			const response = await axios.post('http://localhost:5173/api/login', data, {
 				withCredentials: true
@@ -27,11 +28,11 @@
 				console.log('Siker!');
 				isClicked = false;
 				console.log(response.data.token);
-				axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
 				window.localStorage.setItem('token', response.data.token);
 				goto('/');
 			} else {
 				errorMessage = 'Hiba történt!';
+				console.log(response)
 			}
 		} catch {
 			errorMessage = 'Hiba történt!';
@@ -91,7 +92,7 @@
 			<h1 class="mb-8 text-3xl text-center">Bejelentkezés</h1>
 			<p class="text-xl text-red-500 text-center">{errorMessage}</p>
 			<input
-				bind:value={usernameOrEmail}
+				bind:value={usernam}
 				type="text"
 				class="block border border-grey-light w-full p-3 rounded mb-4 font-bold text-gray-950"
 				placeholder="Felhasználónév vagy Email"
@@ -105,7 +106,7 @@
 			<button
 				type="submit"
 				class="w-full text-center py-3 rounded bg-green text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1"
-				on:click={getUserData}>Bejelentkezés</button
+				on:click={login}>Bejelentkezés</button
 			>
 		</div>
 

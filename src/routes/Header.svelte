@@ -3,10 +3,12 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
-
+	import { Avatar } from '@skeletonlabs/skeleton';
+	
 	let showModal = false;
 	let modalTitle = 'Alkalmazás menü';
 	let modalContent = 'Modal Content';
+	export let authorized = false;
 </script>
 
 <header class="text-gray-950">
@@ -15,7 +17,7 @@
 			<img src={logo} alt="SvelteKit" />
 		</a> -->
 
-		<button  on:click={() => showModal = true}>
+		<button on:click={() => (showModal = true)}>
 			<svg xmlns="http://www.w3.org/2000/svg" width="107" height="128" viewBox="0 0 107 128"
 				><title>svelte-logo</title><path
 					d="M94.1566,22.8189c-10.4-14.8851-30.94-19.2971-45.7914-9.8348L22.2825,29.6078A29.9234,29.9234,0,0,0,8.7639,49.6506a31.5136,31.5136,0,0,0,3.1076,20.2318A30.0061,30.0061,0,0,0,7.3953,81.0653a31.8886,31.8886,0,0,0,5.4473,24.1157c10.4022,14.8865,30.9423,19.2966,45.7914,9.8348L84.7167,98.3921A29.9177,29.9177,0,0,0,98.2353,78.3493,31.5263,31.5263,0,0,0,95.13,58.117a30,30,0,0,0,4.4743-11.1824,31.88,31.88,0,0,0-5.4473-24.1157"
@@ -33,15 +35,15 @@
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 		</svg>
 		<ul class="font-bold bg-gray-950 tex">
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/" class="text-gray-950">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">About</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/Lists' ? 'page' : undefined}>
-				<a href="/lists">Lists</a>
-			</li>
+				<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+					<a href="/" class="text-gray-950">Home</a>
+				</li>
+				<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
+					<a href="/about">About</a>
+				</li>
+				<li aria-current={$page.url.pathname === '/login' ? 'page' : undefined}>
+					<a href="/login">Sign in</a>
+				</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
@@ -49,12 +51,9 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
-		</a>
+		
 	</div>
 </header>
-
 <style>
 	header {
 		display: flex;
@@ -65,6 +64,7 @@
 		width: 3em;
 		height: 3em;
 	}
+
 
 	.corner a {
 		display: flex;

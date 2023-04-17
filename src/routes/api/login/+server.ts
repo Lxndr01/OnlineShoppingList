@@ -20,11 +20,13 @@ type TokenData = {
 export const POST = async ({ request }: { request: Request }) => {
 	try {
 		const user = (await request.json()) as User;
+		console.log(user)
 		const registeredUser = await prisma.user.findFirst({
 			where: {
-				email: user.email
+					username: user.email
 			}
 		});
+		console.log(registeredUser)
 		if (registeredUser && bcrypt.compareSync(user.password, registeredUser.password)) {
 			const newTokenData: TokenData = {
 				username: registeredUser.username,

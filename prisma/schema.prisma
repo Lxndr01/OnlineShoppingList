@@ -27,7 +27,7 @@ model List {
   name       String     @default("alapértelmezett")
   expiresat  String
   importance Importance @default(DEFAULT)
-  content    String
+  content    String[]
   users      ListUser[] // renamed to ListUser to represent the join table between User and List
 }
 

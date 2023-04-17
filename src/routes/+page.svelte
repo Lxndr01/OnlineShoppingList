@@ -1,13 +1,12 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
 	import { push } from 'svelte-spa-router';
 	import { goto } from '$app/navigation';
 	import '../app.css';
 	import Card from '$lib/components/Card.svelte';
+	import Header from './Header.svelte';
+	import { page } from '$app/stores';
 
 	let authorized = false;
 	let userId = '';
