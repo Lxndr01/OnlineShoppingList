@@ -21,12 +21,6 @@
 		status: boolean;
 	};
 
-	let items = [
-		{ value: 'DEFAULT', label: 'Normál' },
-		{ value: 'LAZY', label: 'Ráérős' },
-		{ value: 'IMPORTANT', label: 'Fontos' }
-	];
-
 	let newItem = '';
 
 	let todoList = [];
@@ -35,11 +29,6 @@
 		todoList = [...todoList, { text: newItem, status: false }];
 
 		newItem = '';
-	}
-
-	function removeFromList(index) {
-		todoList.splice(index, 1);
-		todoList = todoList;
 	}
 
 	onMount(async () => {
@@ -61,24 +50,9 @@
 			}
 		} else {
 		}
-		const response = await axios.post('http://localhost:5173/api/lists/get/' + listId, {
-			withCredentials: true
-		});
-		if (response.status === 200) {
-			console.log(response.data.result);
-			name = response.data.result.name;
-			importance = response.data.result.importance;
-			content = response.data.result.content;
-			expiresat = response.data.result.expiresat;
-			content.forEach((element) => {
-				addToList(element);
-			});
-		} else {
-			console.log('Hiba történt!');
-		}
 	});
 
-	const updating = async () => {
+	const add = async () => {
 		try {
 			content = [];
 			todoList.forEach((element) => {
@@ -92,11 +66,11 @@
 				expiresat: moment(expiresatFormatted).toISOString(),
 				content: content
 			};
-			const response = await axios.post('http://localhost:5173/api/lists/update/' + listId, data, {
+			const response = await axios.post('http://localhost:5173/api/lists/add', data, {
 				withCredentials: true
 			});
 			if (response.status === 201) {
-				goto('/lists')
+				console.log(response.data);
 			} else {
 				console.log('Hiba történt!');
 			}
@@ -110,14 +84,13 @@
 	<div class="bg-grey-lighter min-h-screen flex flex-col">
 		<div class="container max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
 			<div class="bg-stone-50 px-6 py-10 rounded shadow-lg h-[160] text-black w-full rounded-xl">
-				<h1 class="mb-8 text-3xl text-center font-bold">Módosítás</h1>
-				<h1 class="mb-8 text-3xl text-center">Lista azonosító: {listId}</h1>
+				<h1 class="mb-8 text-3xl text-center font-bold">Létrehozás</h1>
 				<p class="text-xl text-red-500 text-center" />
 				<input
 					bind:value={name}
 					type="text"
 					class="block border border-grey-light w-full p-3 rounded mb-4 font-bold text-gray-950"
-					placeholder="Felhasználónév vagy Email"
+					placeholder="Lista neve"
 				/>
 				<input
 					bind:value={newItem}
@@ -147,7 +120,7 @@
 				<button
 					type="submit"
 					class="w-full text-center py-3 rounded bg-green text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1 font-bold"
-					on:click={updating}>Mentés</button
+					on:click={add}>Hozzáadás</button
 				>
 			</div>
 		</div>

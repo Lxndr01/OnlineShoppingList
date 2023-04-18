@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import axios from 'axios';
 	import { onMount } from 'svelte';
-	import '../../../app.css';
+	import '../../../../app.css';
 	import Select from 'svelte-select';
 	import moment from 'moment';
 	import { element } from 'svelte/internal';
@@ -78,7 +78,7 @@
 		}
 	});
 
-	const updating = async () => {
+	const deleting = async () => {
 		try {
 			content = [];
 			todoList.forEach((element) => {
@@ -92,16 +92,16 @@
 				expiresat: moment(expiresatFormatted).toISOString(),
 				content: content
 			};
-			const response = await axios.post('http://localhost:5173/api/lists/update/' + listId, data, {
+			const response = await axios.post('http://localhost:5173/api/lists/delete/' + listId, {
 				withCredentials: true
 			});
-			if (response.status === 201) {
+			if (response.status === 200) {
 				goto('/lists')
 			} else {
 				console.log('Hiba történt!');
 			}
-		} catch {
-			console.log('Hiba történt!');
+		} catch (e){
+			console.log(e);
 		}
 	};
 </script>
@@ -119,35 +119,10 @@
 					class="block border border-grey-light w-full p-3 rounded mb-4 font-bold text-gray-950"
 					placeholder="Felhasználónév vagy Email"
 				/>
-				<input
-					bind:value={newItem}
-					type="text"
-					placeholder="Új vennivaló.."
-					class="block border border-grey-light w-full p-3 rounded mb-4 font-bold text-gray-950"
-				/>
-				<button
-					on:click={addToList(newItem)}
-					class="w-full text-center py-3 rounded bg-green text-white bg-green-400 hover:bg-green-600 focus:outline-none my-1 font-bold"
-					>Add</button
-				>
-
-				<br class="mb-10" />
-				{#each todoList as item, index}
-					<input bind:checked={item.status} type="checkbox" />
-					<span class:checked={item.status} class="font-semibold text-md">{item.text}</span>
-					<br />
-				{/each}
-				<br class="mb-2" />
-				<input
-					bind:value={expiresatFormatted}
-					type="text"
-					class="block border border-grey-light w-full p-3 rounded mb-4 font-bold text-gray-950"
-					placeholder="Lejárati dátum"
-				/>
 				<button
 					type="submit"
-					class="w-full text-center py-3 rounded bg-green text-white bg-orange-400 hover:bg-orange-600 focus:outline-none my-1 font-bold"
-					on:click={updating}>Mentés</button
+					class="w-full text-center py-3 rounded bg-green text-white bg-red-400 hover:bg-red-600 focus:outline-none my-1 font-bold"
+					on:click={deleting}>Törlés</button
 				>
 			</div>
 		</div>

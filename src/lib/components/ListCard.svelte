@@ -25,15 +25,19 @@
 	<div class="px-6 pt-4 pb-2">
 		<span
 			class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-			>Fontosság: {importance}</span
+			>{expiresatFormatted}</span
 		>
 		<span
-			class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-			>{expiresatFormatted}</span
+			class="inline-block bg-green-500 rounded-full px-3 py-3 text-sm font-semibold text-gray-700 mr-2 mb-2"
+			><button on:click={() => goto(('/lists/share/'+id))}>Megosztás</button></span
 		>
         <span
 			class="inline-block bg-orange-500 rounded-full px-3 py-3 text-sm font-semibold text-gray-700 mr-2 mb-2"
 			><button on:click={() => goto(('/lists/'+id))}>Módosítás</button></span
+		>
+		<span
+			class="inline-block bg-red-500 rounded-full px-3 py-3 text-sm font-semibold text-gray-700 mr-2 mb-2"
+			><button on:click={() => goto(('/lists/delete/'+id))}>Törlés</button></span
 		>
 	</div>
 </div>

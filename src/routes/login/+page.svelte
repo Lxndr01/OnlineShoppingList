@@ -95,7 +95,7 @@
 				bind:value={usernam}
 				type="text"
 				class="block border border-grey-light w-full p-3 rounded mb-4 font-bold text-gray-950"
-				placeholder="Felhasználónév vagy Email"
+				placeholder="Felhasználónév"
 			/>
 			<input
 				bind:value={password}

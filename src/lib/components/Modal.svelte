@@ -17,6 +17,9 @@
 					<div class="text-stone-50 hover:text-orange-500 mb-4 font-semibold">
 						<a href="/lists">Listák</a>
 					</div>
+					<div class="text-stone-50 hover:text-orange-500 mb-4 font-semibold">
+						<a href="/lists/add">Lista hozzáadása</a>
+					</div>
 					<div class="text-stone-50 mb-4 font-semibold hover:text-orange-500">
 						<a  href="/settings">Beállítások</a>
 					</div>

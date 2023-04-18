@@ -15,26 +15,26 @@ type TokenData = {
     email: string;
 };
 
-export const POST  = async ({ request }: { request: Request }) => {
+export const POST = async ({ params, request }: { params: { id: string }, request: Request }) => {
     try {
-        const listId = (await request.json()) as Data
+        const listId = params.id;
         const token = request.headers.get('Authorization')?.split(' ')[1];
         if (!token) {
             throw new Error('No token provided');
         }
-
+        console.log(listId)
         const verified: TokenData = jwt.verify(token, JWTKEY);
         const { id } = verified;
 
         const result = await prisma.$transaction([
           prisma.listUser.deleteMany({
             where: {
-              listId: listId.id
+              listId: listId
             }
           }),
           prisma.list.delete({
             where: {
-              id: listId.id 
+              id: listId
             }
           })
         ]);

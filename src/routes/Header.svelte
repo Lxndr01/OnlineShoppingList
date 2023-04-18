@@ -36,13 +36,13 @@
 		</svg>
 		<ul class="font-bold bg-gray-950 tex">
 				<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-					<a href="/" class="text-gray-950">Home</a>
+					<a href="/" class="text-gray-950">Otthon</a>
 				</li>
-				<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-					<a href="/about">About</a>
+				<li aria-current={$page.url.pathname === '/lists' ? 'page' : undefined}>
+					<a href="/lists">Listák</a>
 				</li>
 				<li aria-current={$page.url.pathname === '/login' ? 'page' : undefined}>
-					<a href="/login">Sign in</a>
+					<a href="/login">Bejelentkezés</a>
 				</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
