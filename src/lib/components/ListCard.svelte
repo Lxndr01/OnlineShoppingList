@@ -4,7 +4,6 @@
 	import { goto } from "$app/navigation";
 
     export let name: string;
-    export let tags: string[];
     export let content: string[];
     export let id: string;
     export let importance: string;
@@ -14,7 +13,7 @@
 </script>
 
 <div class="max-w-lg rounded shadow-lg bg-stone-50">
-	<img class="w-full" src="https://garlicdelight.com/wp-content/uploads/20210319-reverse-shopping-list.png" alt={name} />
+	<img class="w-full" src="https://www.cdc.gov/diabetes/images/managing/grocery-shopping-SM.png?_=17886" alt={name} />
 	<div class="px-6 py-4">
 		<div class="font-bold text-3xl mb-2">{name || 'Bevásárlólista'}</div>
 		<p class="text-gray-700 text-base">
@@ -26,7 +25,7 @@
 	<div class="px-6 pt-4 pb-2">
 		<span
 			class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-			>#{importance}</span
+			>Fontosság: {importance}</span
 		>
 		<span
 			class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"

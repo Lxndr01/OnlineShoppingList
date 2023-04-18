@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import { JWTKEY } from '$env/static/private';
+import { list } from 'postcss';
 
 const prisma = new PrismaClient();
 
@@ -11,8 +12,17 @@ type TokenData = {
     email: string;
 };
 
+type ListData = {
+    id: string;
+    content: string[];
+    importance: string;
+    name: string,
+    expiresat: string
+};
+
 export const POST = async ({ request }: { request: Request }) => {
     try {
+        const listData: ListData = await (request.json()) as ListData
         const token = request.headers.get('Authorization')?.split(' ')[1];
         if (!token) {
             throw new Error('No token provided');
@@ -30,10 +40,10 @@ export const POST = async ({ request }: { request: Request }) => {
                     create: {
                         list: {
                             create: {
-                                expiresat: request.body.expiresat ||  new Date(),
-                                content: request.body.content || [''],
-                                importance: request.body.importance || 'DEFAULT',
-                                name: request.body.name || ''
+                                expiresat: listData.expiresat ||  new Date(),
+                                content: listData.content || [''],
+                                importance: listData.importance || 'DEFAULT',
+                                name: listData.name || ''
                             }
                         }
                     }
