@@ -23,7 +23,7 @@ export const POST = async ({ request }: { request: Request }) => {
 		console.log(user)
 		const registeredUser = await prisma.user.findFirst({
 			where: {
-					username: user.email
+					username: user.username
 			}
 		});
 		console.log(registeredUser)

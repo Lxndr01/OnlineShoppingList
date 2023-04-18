@@ -41,7 +41,7 @@
 	};
 	const loginWithFacebook = async (email, username, password) => {
 		const data = {
-			username: '',
+			username: username,
 			email: email,
 			password: password
 		};

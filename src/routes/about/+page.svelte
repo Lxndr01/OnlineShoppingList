@@ -1,6 +1,11 @@
 <script>
+	import ListCard from '$lib/components/ListCard.svelte';
 	import '../../app.css';
-	import '../styles.css'
+	import '../styles.css';
+
+	let name = 'My List';
+	let tags = ['tag1', 'tag2', 'tag3'];
+	let content = 'This is my list content';
 </script>
 
 <svelte:head>
@@ -25,12 +30,9 @@
 	</p>
 
 	<p>
-		
+		<ListCard name={name} tags={tags} content={content}/>
 	</p>
 </div>
 
 <style>
-	* {
-		background-color: white;
-	}
 </style>
